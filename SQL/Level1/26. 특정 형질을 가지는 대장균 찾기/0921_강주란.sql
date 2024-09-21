@@ -1,0 +1,17 @@
+
+/*CONV(데이터, 원본 진법, 변환할 진법)*/
+SELECT COUNT(ID) COUNT
+FROM (SELECT ID, LPAD(CAST(CONV(GENOTYPE, 10, 2) AS CHAR), LENGTH(CAST(CONV(GENOTYPE, 10, 2) AS CHAR)), '0') GENOTYPE
+             FROM ECOLI_DATA
+             ORDER BY ID) t
+WHERE (SUBSTR(t.GENOTYPE, -2, 1) = '0' OR SUBSTR(t.GENOTYPE, -2, 1) = '')
+AND (SUBSTR(t.GENOTYPE, -1, 1) ='1' OR SUBSTR(t.GENOTYPE, -3, 1) = '1');
+
+
+/* 비트연산자 활용
+컴퓨터는 2진수로 값을 변환해서 인지하기때문에 &를 쓰면 된다 */
+
+
+SELECT COUNT(*) AS COUNT
+FROM ECOLI_DATA
+WHERE (GENOTYPE & 2 = 0) AND (GENOTYPE & 1 != 0 OR GENOTYPE & 4 != 0);
