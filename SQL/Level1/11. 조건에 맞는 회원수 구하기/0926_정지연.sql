@@ -1,0 +1,12 @@
+
+SELECT COUNT(*)
+FROM USER_INFO
+WHERE JOINED LIKE '2021%' AND AGE BETWEEN 20 AND 29;
+
+
+
+/** 
+> LIKE 대신 WHERE YEAR(JOINED) = 2021 사용 가능
+> BETWEEN 대신 AGE >= 20 AND AGE <= 29 사용 가능
+- 웬만하면, 칼럼 명 변환해 주자 SELECT COUNT(*) AS USERS
+**/
