@@ -1,0 +1,28 @@
+
+
+SELECT TRUNCATE(PRICE/10000,0)*10000 PRICE_GROUP
+        , COUNT(PRODUCT_ID) PRODUCTS
+FROM PRODUCT
+GROUP BY 1
+ORDER BY 1
+
+/*테스트 케이스 고려하지 못한 풀이 =*/
+SELECT t.*
+FROM ( SELECT CASE WHEN PRICE < 10000 THEN '0'
+            WHEN PRICE < 20000 THEN '10000'
+            WHEN PRICE < 30000 THEN '20000'
+            WHEN PRICE < 40000 THEN '30000'
+            ELSE NULL END AS PRICE_GROUP
+        , COUNT(PRODUCT_ID) PRODUCTS
+FROM PRODUCT
+GROUP BY 1
+ORDER BY 1) t
+WHERE t.PRICE_GROUP IS NOT NULL;
+
+
+/* 함수
+ROUND(컬럼명, 소수점 자리 수) : 반올림, 소수점 default=1
+CEILING(컬럼명) : 올림
+FLOOR(컬럼명) : 버림
+TRUNCATE(컬럼명, 소수점 자리 수) : 소수점 자리까지만 출력하고 나머지는 버림
+*/
