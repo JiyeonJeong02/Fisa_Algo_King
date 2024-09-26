@@ -1,0 +1,7 @@
+SELECT YEAR(YM) YEAR
+        ,ROUND(AVG(PM_VAL1),2) PM10
+        ,ROUND(AVG(PM_VAL2),2) "PM2.5" /*.을 컬럼명에 포함하려면 따옴표 넣기*/
+FROM AIR_POLLUTION
+WHERE LOCATION2 = '수원'
+GROUP BY 1
+ORDER BY 1;
